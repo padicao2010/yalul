@@ -36,7 +36,7 @@ static void unsetRegistry(lua_State *L, void *ctr)
 static void gcAllRegistry(lua_State *L)
 {
     uiControl *ctr = (uiControl *)lua_topointer(L, -1);
-    printf("GC %p\n", ctr);
+    //printf("GC %p\n", ctr);
 
     lua_gettable(L, LUA_REGISTRYINDEX);
     if(lua_isnil(L, -1)) {
@@ -61,16 +61,16 @@ static int yalulGC(lua_State *L)
     uiControl *ctr = CAST_ARG(1, Control);
 
     if(!checked || uiControlParent(ctr) == NULL) {
-        printf("destroyed it: %p\n", ctr);
+        //printf("destroyed it: %p\n", ctr);
         if(checked) {
-            printf("REAL destroy %p\n", ctr);
+            //printf("REAL destroy %p\n", ctr);
             uiControlDestroy(ctr);
         }
 
         lua_pushlightuserdata(L, ctr);
         gcAllRegistry(L);
     } else {
-        printf("Has parent, set it: %p\n", ctr);
+        //printf("Has parent, set it: %p\n", ctr);
         lua_pushlightuserdata(L, ctr);
         lua_gettable(L, LUA_REGISTRYINDEX);
         lua_pushboolean(L, 1);
@@ -130,7 +130,7 @@ int yalulRegisterCallback(lua_State *L, void *control, const char *name)
 
 int yalulSetChild(lua_State *L, void *control, void *child, int index)
 {
-    printf("SET %p to %p\n", child, control);
+    //printf("SET %p to %p\n", child, control);
     lua_pushlightuserdata(L, control);
     lua_gettable(L, LUA_REGISTRYINDEX);
 
@@ -160,7 +160,7 @@ int yalulReleaseChild(lua_State *L, void *control, int index)
     lua_gettable(L, LUA_REGISTRYINDEX);
     lua_getfield(L, -1, "isGCed");
     if(lua_toboolean(L, -1)) {
-        printf("destroyed it:%p\n", child);
+        //printf("destroyed it:%p\n", child);
         uiControlDestroy(child);
 
         lua_pushlightuserdata(L, child);
