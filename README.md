@@ -186,3 +186,5 @@ ColorButton is a button, and when you click it, it will show up a dialog for sel
 * colorButton:color(): returns r, g, b, a. All of them are double value between 0.0 ~ 1.0
 * colorButton:setColor(r, g, b, a)
 * colorButton:onChanged(func): func, has four arguments, r, g, b, a, no returns.
+
+### Mores are coming.
