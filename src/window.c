@@ -19,8 +19,32 @@ static int windowSetChild(lua_State *L)
 static int windowSetMargined(lua_State *L)
 {
     assert(yalulCheckControl(L, 1, YALUL_WINDOW_LIB));
-    uiWindowSetMargined(CAST_ARG(1, Window), luaL_checknumber(L, 2));
+    uiWindowSetMargined(CAST_ARG(1, Window), luaL_checkinteger(L, 2));
     RETURN_SELF;
+}
+
+static int windowMargined(lua_State *L)
+{
+    assert(yalulCheckControl(L, 1, YALUL_WINDOW_LIB));
+    int m = uiWindowMargined(CAST_ARG(1, Window));
+    lua_pushinteger(L, m);
+    return 1;
+}
+
+static int windowSetTitle(lua_State *L)
+{
+    assert(yalulCheckControl(L, 1, YALUL_WINDOW_LIB));
+    uiWindowSetTitle(CAST_ARG(1, Window), luaL_checkstring(L, 2));
+    RETURN_SELF;
+}
+
+static int windowTitle(lua_State *L)
+{
+    assert(yalulCheckControl(L, 1, YALUL_WINDOW_LIB));
+    char *title = uiWindowTitle(CAST_ARG(1, Window));
+    lua_pushstring(L, title);
+    uiFreeText(title);
+    return 1;
 }
 
 static int callback_onclose(uiWindow *w, void *p)
@@ -43,6 +67,9 @@ static int windowOnClosing(lua_State *L)
 static struct luaL_Reg meta_Window[] = {
     { "setChild",            windowSetChild },
     { "setMargined",         windowSetMargined },
+    { "margined",            windowMargined },
+    { "title",               windowTitle },
+    { "setTitle",            windowTitle },
     { "onClosing",           windowOnClosing },
 
     { NULL }

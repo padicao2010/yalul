@@ -68,6 +68,9 @@ Control is an abstract class, the parent class for all the other controls. It ma
 
 * ui.newWindow(title, width, height, hasMenuBar): return the *Window*, for now, *MenuBar* is not supported.
 * window:setChild(control)
+* window:title()
+* window:setTitle(text)
+* window:margined(): return an integer
 * window:setMargined(int)
 * window:onClosing(func): the parameter func is a function with no arguments, which returns true/false representing whether to close the window of not. Nil is also false.
 
@@ -83,6 +86,14 @@ local w = ui.newWindow("Hello", 400, 400, false)
                 end)
 w:show()
 ```
+
+### Group
+
+* ui.newGroup(title)
+* group:title()
+* group:setTitle(text)
+* group:margined()
+* group:setMargined(intValue)
 
 ### Box
 

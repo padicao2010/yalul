@@ -23,6 +23,7 @@ int yalulSetCombobox(lua_State *L);
 int yalulSetEditableCombobox(lua_State *L);
 int yalulSetSlider(lua_State *L);
 int yalulSetSpinbox(lua_State *L);
+int yalulSetGroup(lua_State *L);
 
 int yalulDoCallback(lua_State *L, void *control, const char *name, int nargs);
 int yalulRegisterCallback(lua_State *L, void *control, const char *name);

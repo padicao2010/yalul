@@ -467,6 +467,14 @@ static int yalulNewSpinbox(lua_State *L)
     return 1;
 }
 
+static int yalulNewGroup(lua_State *L)
+{
+    assert(yalulCheckControl(L, 0, NULL));
+    uiGroup *group = uiNewGroup(luaL_checkstring(L, 1));
+    yalulCreateObject(L, group, YALUL_GROUP_LIB);
+    return 1;
+}
+
 
 static struct luaL_Reg yalul_table[] = {
     { "init",                   yalulInit },
@@ -489,6 +497,7 @@ static struct luaL_Reg yalul_table[] = {
     { "newEditableCombobox",    yalulNewEditableCombobox },
     { "newSlider",              yalulNewSlider },
     { "newSpinbox",             yalulNewSpinbox },
+    { "newGroup",               yalulNewGroup },
 
     { "openFile",               yalulOpenFile },
     { "saveFile",               yalulSaveFile },
@@ -517,6 +526,7 @@ int luaopen_libyalul(lua_State *L)
     yalulSetEditableCombobox(L);
     yalulSetSlider(L);
     yalulSetSpinbox(L);
+    yalulSetGroup(L);
 
     lua_pop(L, 1);
 

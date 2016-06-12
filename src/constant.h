@@ -11,6 +11,7 @@
 #define YALUL_EDITABLECOMBOBOX_LIB     "yalul.editablecombobox"
 #define YALUL_SLIDER_LIB    "yalul.slider"
 #define YALUL_SPINBOX_LIB   "yalul.spinbox"
+#define YALUL_GROUP_LIB     "yalul.group"
 
 #define YALUL_INITED        "yalul.inited"
 
