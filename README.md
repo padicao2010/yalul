@@ -43,7 +43,7 @@ ui.main()
 ```
 
 * ui.init(): initialize libui and yalul
-* ui.main(): jump into the loop, only ui.quit can't finish the loop
+* ui.main(): jump into the loop, only ui.quit can finish the loop
 * ui.quit(): finish the loop
 
 There are some APIs for showing a standard dialog. These APIs all consumes a *Window* control as the first arguments. They may be moved into *Window* one day.
