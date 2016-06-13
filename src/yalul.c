@@ -134,10 +134,27 @@ int yalulSetChild(lua_State *L, void *control, void *child, int index)
     lua_pushlightuserdata(L, control);
     lua_gettable(L, LUA_REGISTRYINDEX);
 
-    if(index < 0) {
-        lua_len(L, -1);
-        index = lua_tointeger(L, -1) + 1;
-        lua_pop(L, 1);
+    lua_pushlightuserdata(L, child);
+    lua_seti(L, -2, index);
+    lua_pop(L, 1);
+}
+
+int yalulInsertChild(lua_State *L, void *control, void *child, int index)
+{
+    lua_pushlightuserdata(L, control);
+    lua_gettable(L, LUA_REGISTRYINDEX);
+
+    lua_len(L, -1);
+    int length = lua_tointeger(L, -1);
+    lua_pop(L, 1);
+
+    if(index <= 0) {
+        index = length + 1;
+    }
+
+    for(int i = length; i >= index; i--) {
+        lua_geti(L, -1, i);
+        lua_seti(L, -2, i + 1);
     }
 
     lua_pushlightuserdata(L, child);
@@ -475,6 +492,14 @@ static int yalulNewGroup(lua_State *L)
     return 1;
 }
 
+static int yalulNewTab(lua_State *L)
+{
+    assert(yalulCheckControl(L, 0, NULL));
+    uiTab *tab = uiNewTab();
+    yalulCreateObject(L, tab, YALUL_TAB_LIB);
+    return 1;
+}
+
 
 static struct luaL_Reg yalul_table[] = {
     { "init",                   yalulInit },
@@ -498,6 +523,7 @@ static struct luaL_Reg yalul_table[] = {
     { "newSlider",              yalulNewSlider },
     { "newSpinbox",             yalulNewSpinbox },
     { "newGroup",               yalulNewGroup },
+    { "newTab",                 yalulNewTab },
 
     { "openFile",               yalulOpenFile },
     { "saveFile",               yalulSaveFile },
@@ -527,6 +553,7 @@ int luaopen_libyalul(lua_State *L)
     yalulSetSlider(L);
     yalulSetSpinbox(L);
     yalulSetGroup(L);
+    yalulSetTab(L);
 
     lua_pop(L, 1);
 

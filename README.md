@@ -198,4 +198,16 @@ ColorButton is a button, and when you click it, it will show up a dialog for sel
 * colorButton:setColor(r, g, b, a)
 * colorButton:onChanged(func): func, has four arguments, r, g, b, a, no returns.
 
+### Tab
+
+Tab is a multi-pages container, and every page has a title.
+
+* ui.newTab()
+* tab:append(title, control): add a new page, with the title, containing the control.
+* tab:insertAt(title, index, control): add a new page at a specific position.
+* tab:delete(index): remove the page at specific position
+* tab:delete(control): remove the specific control
+* tab:margined(index): return the margin of the specific page
+* tab:setMargined(index, intValue): set the margin of the specific page
+
 ### Mores are coming.

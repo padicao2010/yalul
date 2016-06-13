@@ -13,7 +13,7 @@ static int boxAppend(lua_State *L)
     }
     uiBoxAppend(box, child, stretchy);
 
-    yalulSetChild(L, box, child, -1);
+    yalulInsertChild(L, box, child, -1);
 
     RETURN_SELF;
 }

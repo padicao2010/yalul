@@ -24,10 +24,12 @@ int yalulSetEditableCombobox(lua_State *L);
 int yalulSetSlider(lua_State *L);
 int yalulSetSpinbox(lua_State *L);
 int yalulSetGroup(lua_State *L);
+int yalulSetTab(lua_State *L);
 
 int yalulDoCallback(lua_State *L, void *control, const char *name, int nargs);
 int yalulRegisterCallback(lua_State *L, void *control, const char *name);
 int yalulSetChild(lua_State *L, void *control, void *child, int index);
+int yalulInsertChild(lua_State *L, void *control, void *child, int index);
 int yalulReleaseChild(lua_State *L, void *control, int index);
 int yalulGetChildIndex(lua_State *L, uiControl *parent, uiControl *child);
 int yalulCheckControl(lua_State *L, int index, const char *name);
