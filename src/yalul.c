@@ -59,6 +59,7 @@ static int yalulGC(lua_State *L)
 {
     int checked = yalulCheckControl(L, -1, NULL);
     uiControl *ctr = CAST_ARG(1, Control);
+    //printf("GC %p\n", ctr);
 
     if(!checked || uiControlParent(ctr) == NULL) {
         //printf("destroyed it: %p\n", ctr);
@@ -122,6 +123,17 @@ int yalulRegisterCallback(lua_State *L, void *control, const char *name)
 {
     lua_pushlightuserdata(L, control);
     lua_gettable(L, LUA_REGISTRYINDEX);
+
+    if(lua_isnil(L, -1)) {
+        lua_pop(L, 1);
+
+        lua_pushlightuserdata(L, control);
+        lua_newtable(L);
+        lua_settable(L, LUA_REGISTRYINDEX);
+
+        lua_pushlightuserdata(L, control);
+        lua_gettable(L, LUA_REGISTRYINDEX);
+    }
 
     lua_pushvalue(L, -2);
     lua_setfield(L, -2, name);
@@ -236,11 +248,23 @@ int yalulCheckControl(lua_State *L, int index, const char *name)
 
 int yalulSetSubControl(lua_State *L, const char *name)
 {
-    lua_newtable(L);                        // Set Control as subclass of SubControl
-    lua_pushvalue(L, -3);
+    lua_newtable(L);
+    lua_pushvalue(L, -3);                   // Set Control as subclass of SubControl
     lua_setfield(L, -2, "__index");
     lua_setmetatable(L, -2);
 
+    luaL_newmetatable(L, name);             // Register SubControl
+    lua_pushvalue(L, -2);
+    lua_setfield(L, -2, "__index");
+    lua_pushcfunction(L, yalulGC);
+    lua_setfield(L, -2, "__gc");
+    lua_pop(L, 1);
+
+    return 0;
+}
+
+int yalulInitMenu(lua_State *L, const char *name)
+{
     luaL_newmetatable(L, name);             // Register SubControl
     lua_pushvalue(L, -2);
     lua_setfield(L, -2, "__index");
@@ -263,6 +287,10 @@ static int yalulInit(lua_State *L)
     lua_pushboolean(L, 1);
     lua_settable(L, LUA_REGISTRYINDEX);
 
+    lua_pushstring(L, YALUL_MENUS_LIB);
+    lua_newtable(L);
+    lua_settable(L, LUA_REGISTRYINDEX);
+
     lua_pushstring(L, err);
 
     return 1;
@@ -272,6 +300,10 @@ static int yalulUninit(lua_State *L)
 {
     assert(yalulCheckControl(L, 0, NULL));
     lua_pushstring(L, YALUL_INITED);
+    lua_pushnil(L);
+    lua_settable(L, LUA_REGISTRYINDEX);
+
+    lua_pushstring(L, YALUL_MENUS_LIB);
     lua_pushnil(L);
     lua_settable(L, LUA_REGISTRYINDEX);
 
@@ -291,6 +323,10 @@ static int yalulQuit(lua_State *L)
     assert(yalulCheckControl(L, 0, NULL));
 
     lua_pushstring(L, YALUL_INITED);
+    lua_pushnil(L);
+    lua_settable(L, LUA_REGISTRYINDEX);
+
+    lua_pushstring(L, YALUL_MENUS_LIB);
     lua_pushnil(L);
     lua_settable(L, LUA_REGISTRYINDEX);
 
@@ -500,6 +536,24 @@ static int yalulNewTab(lua_State *L)
     return 1;
 }
 
+static int yalulNewMenu(lua_State *L)
+{
+    assert(yalulCheckControl(L, 0, NULL));
+    uiMenu *menu = uiNewMenu(luaL_checkstring(L, 1));
+
+    //printf("NewMenu %p\n", menu);
+    yalulCreateObject(L, menu, YALUL_MENU_LIB);
+
+    lua_getfield(L, LUA_REGISTRYINDEX, YALUL_MENUS_LIB);
+    lua_len(L, -1);
+    int index = luaL_checkinteger(L, -1) + 1;
+    lua_pop(L, 1);
+    lua_pushvalue(L, -2);
+    lua_seti(L, -2, index);
+    lua_pop(L, 1);
+
+    return 1;
+}
 
 static struct luaL_Reg yalul_table[] = {
     { "init",                   yalulInit },
@@ -525,6 +579,8 @@ static struct luaL_Reg yalul_table[] = {
     { "newGroup",               yalulNewGroup },
     { "newTab",                 yalulNewTab },
 
+    { "newMenu",                yalulNewMenu },
+
     { "openFile",               yalulOpenFile },
     { "saveFile",               yalulSaveFile },
     { "msgBox",                 yalulMsgBox },
@@ -538,6 +594,8 @@ int luaopen_libyalul(lua_State *L)
     luaL_newlib(L, yalul_table);    // libyalul = { ... }
 
     yalulSetControl(L);
+
+    yalulSetMenu(L);
 
     yalulSetWindow(L);
     yalulSetCheckbox(L);

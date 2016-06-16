@@ -13,6 +13,8 @@
 #define YALUL_SPINBOX_LIB   "yalul.spinbox"
 #define YALUL_GROUP_LIB     "yalul.group"
 #define YALUL_TAB_LIB       "yalul.tab"
+#define YALUL_MENU_LIB      "yalul.menu"
+#define YALUL_MENUS_LIB     "yalul.menus"
 
 #define YALUL_INITED        "yalul.inited"
 

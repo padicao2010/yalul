@@ -2,7 +2,20 @@ local ui = require("libyalul")
 
 ui.init()
 
-local w = ui.newWindow("yalul Control Gallery", 640, 480, false)
+ui.newMenu("File")
+    :appendItem("Open"):onItemClicked(function() print("Open") end)
+    :appendItem("Save")
+    :appendSeparator()
+    :appendCheckItem("Enable"):setItemChecked(true):onItemClicked(
+        function(checked)
+            print(checked) 
+        end)
+ui.newMenu("Edit")
+    :appendItem("Copy")
+    :appendItem("Cut")
+    :appendItem("paste")  
+
+local w = ui.newWindow("yalul Control Gallery", 640, 480, true)
     :setMargined(1)
     :onClosing(
         function() 
