@@ -234,7 +234,6 @@ Tab is a multi-pages container, and every page has a title.
 
 ## TODO
 
-* support *Menu*
 * support *DateTimePicker*, the current state of libui is you choose a date or a time, and then it's over.
 * support *FontButton*, the current state of libui is you choose a font, and the it's over.
 * support *MultilineEntry*, the current state of libui is the height of the control is zero in Linux.
