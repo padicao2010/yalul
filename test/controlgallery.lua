@@ -2,20 +2,48 @@ local ui = require("libyalul")
 
 ui.init()
 
-ui.newMenu("File")
-    :appendItem("Open"):onItemClicked(function() print("Open") end)
-    :appendItem("Save")
-    :appendSeparator()
-    :appendCheckItem("Enable"):setItemChecked(true):onItemClicked(
-        function(checked)
-            print(checked) 
-        end)
-ui.newMenu("Edit")
-    :appendItem("Copy")
-    :appendItem("Cut")
-    :appendItem("paste")  
+local w
 
-local w = ui.newWindow("yalul Control Gallery", 640, 480, true)
+ui.newMenu("File")
+    :appendItem("Open"):onItemClicked(
+        function()
+            local s = ui.openFile(w)
+            if s then
+                ui.msgBox(w, "INFO", "Open File: " .. s)
+            end 
+        end)
+    :appendItem("Save"):onItemClicked(
+        function()
+            local s = ui.saveFile(w)
+            if s then   
+                ui.msgBox(w, "INFO", "Save File: " .. s)
+            end
+        end)
+    :appendSeparator()
+    :appendItem("Quit"):onItemClicked(
+        function()
+            ui.quit()
+        end)
+
+local em
+em = ui.newMenu("Edit")
+    :appendItem("Nothing")
+    :appendSeparator()
+    :appendCheckItem("Enabled"):setItemChecked(true):onItemClicked(
+        function(c)
+            if c then
+                em:enableItem(1)
+            else
+                em:disableItem(1)
+            end
+        end)
+
+ui.newMenu("Help")
+    :appendPreferencesItem()
+    :appendAboutItem()
+    :appendQuitItem()
+
+w = ui.newWindow("yalul Control Gallery", 640, 480, true)
     :setMargined(1)
     :onClosing(
         function() 
@@ -59,5 +87,5 @@ local w = ui.newWindow("yalul Control Gallery", 640, 480, true)
             )
         , true)
     ):show()
-
+    
 ui.main()

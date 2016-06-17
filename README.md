@@ -87,6 +87,28 @@ local w = ui.newWindow("Hello", 400, 400, false)
 w:show()
 ```
 
+### Menu
+
+Due to the difference of design between Mac and Windows, Linux, libui deploys the Mac desgin, because it can be implemented easily by limiting the usage in Windows and Linux.
+
+* ui.newMenu(title): Adds a new menu in menubar, for now, menu can only be added.
+* menu:addItem(title): Adds a submenu to menu
+* menu:addCheckItem(title): Adds a check-style submenu to menu
+* menu:addPreferencesItem(): Adds a preferences-style submenu to menu
+* menu:addAboutItem(): Adds a about-style submenu to menu
+* menu:addQuitItem(): Adds a quit-style submenu to menu
+
+After orginazing all menus, we can deal with it. These four functions all have a optional argument as the first argument. If it's omitted, all comes to the last submenu of the menu. Or not, all comes to the index submenu.
+
+* menu:setItemChecked([index, ]boolValue)
+* menu:enableItem([index])
+* menu:disableItem([index])
+* menu:onItemClicked([index, ]func): func, has one argument, checked or not, always false when it is not a check-style submenu, no returns
+
+We can also get the submenu status.
+
+* menu:itemChecked(index): return intValue. Returns false when it is not a check-style submenu.
+
 ### Group
 
 * ui.newGroup(title)
