@@ -109,6 +109,34 @@ We can also get the submenu status.
 
 * menu:itemChecked(index): return intValue. Returns false when it is not a check-style submenu.
 
+Here's an example:
+
+```lua
+ui.newMenu("File")
+    :appendItem("Open")
+    :appendItem("Save")
+    :appendSeparator()
+    :appendItem("Quit"):onItemClicked(
+        function()
+            ui.quit()
+        end)
+local em
+em = ui.newMenu("Edit")
+    :appendItem("Nothing")
+    :appendCheckItem("Enable"):setItemChecked(true):onItemClicked(
+        function(c)
+            if c then
+                em:enableItem(1)
+            else
+                em:disableItem(1)
+            end
+        end)
+ui.newMenu("Help")
+    :appendPreferencesItem()
+    :appendAboutItem()
+    :appendQuitItem()
+```
+
 ### Group
 
 * ui.newGroup(title)
