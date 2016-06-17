@@ -33,7 +33,7 @@ local ui = require("libyalul")
 
 The yalul application is a looping:
 
-```
+```lua
 ui.init()
 
 -- initialize the UI
@@ -76,7 +76,7 @@ Control is an abstract class, the parent class for all the other controls. It ma
 
 An example:
 
-```
+```lua
 local w = ui.newWindow("Hello", 400, 400, false)
             :setChild(ui.newLabel("Hello, World")
             :setMargined(10)
