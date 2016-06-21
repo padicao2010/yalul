@@ -260,6 +260,19 @@ Tab is a multi-pages container, and every page has a title.
 * tab:margined(index): return the margin of the specific page
 * tab:setMargined(index, intValue): set the margin of the specific page
 
+### MultilineEntry
+
+MultilineEntry is a multiline entry. By now, the height of this control in Linux is zero, so it can't be seen right. Maybe it is alright in other OSes.
+
+* ui.newMultilineEntry()
+* ui.newNWMultilineEntry(): NonWrapping MultilineEntry
+* me:text()
+* me:setText(t)
+* me:readOnly()
+* me:setReadOnly(boolValue)
+* me:append(text)
+* me:onChanged(func): func, one argument, the text, no return
+
 ## TODO
 
 * support *DateTimePicker*, the current state of libui is you choose a date or a time, and then it's over.

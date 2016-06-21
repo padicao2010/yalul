@@ -536,6 +536,23 @@ static int yalulNewTab(lua_State *L)
     return 1;
 }
 
+static int yalulNewMultilineEntry(lua_State *L)
+{
+    assert(yalulCheckControl(L, 0, NULL));
+    uiMultilineEntry *e = uiNewMultilineEntry();
+    yalulCreateObject(L, e, YALUL_MULTILINEENTRY_LIB);
+    return 1;
+}
+
+static int yalulNewNWMultilineEntry(lua_State *L)
+{
+    assert(yalulCheckControl(L, 0, NULL));
+    uiMultilineEntry *e = uiNewNonWrappingMultilineEntry();
+    yalulCreateObject(L, e, YALUL_MULTILINEENTRY_LIB);
+    return 1;
+}
+
+
 static int yalulNewMenu(lua_State *L)
 {
     assert(yalulCheckControl(L, 0, NULL));
@@ -578,6 +595,8 @@ static struct luaL_Reg yalul_table[] = {
     { "newSpinbox",             yalulNewSpinbox },
     { "newGroup",               yalulNewGroup },
     { "newTab",                 yalulNewTab },
+    { "newMultilineEntry",      yalulNewMultilineEntry },
+    { "newNWMultilineEntry",    yalulNewNWMultilineEntry },
 
     { "newMenu",                yalulNewMenu },
 
@@ -612,6 +631,7 @@ int luaopen_libyalul(lua_State *L)
     yalulSetSpinbox(L);
     yalulSetGroup(L);
     yalulSetTab(L);
+    yalulSetMultilineEntry(L);
 
     lua_pop(L, 1);
 

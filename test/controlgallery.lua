@@ -43,6 +43,8 @@ ui.newMenu("Help")
     :appendAboutItem()
     :appendQuitItem()
 
+local mt = "Even when Phillip was not at home, Emmeline had a great deal to busy herself with, and she was never bored or lonely. She would help her mother with her embroidery, or exchange idle gossip with the servants, or go for long walks about the countryside, eating blackberries from the hedgerows and snagging her dress on brambles."
+
 w = ui.newWindow("yalul Control Gallery", 640, 480, true)
     :setMargined(1)
     :onClosing(
@@ -57,6 +59,8 @@ w = ui.newWindow("yalul Control Gallery", 640, 480, true)
                 :append(ui.newEntry():setText("Entry"))
                 :append(ui.newLabel("Label"))
                 :append(ui.newColorButton():setColor(0, 0, 0, 1))
+                :append(ui.newMultilineEntry():append(mt))
+                :append(ui.newNWMultilineEntry():append(mt):setReadOnly(true))
             )
         ):append(ui.newVBox()
             :append(ui.newGroup("Numbers"):setMargined(1)
