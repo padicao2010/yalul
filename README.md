@@ -1,6 +1,6 @@
 # yalul
 
-Yet Another LibUi bindings for Lua. It is still **WIP**.
+Yet Another LibUi bindings for Lua. It is still **WIP**. Libui is also in **WIP**.
 
 Yalul learns a lot from [zevv/libuilua](https://github.com/zevv/libuilua) and [mdombroski/libui-lua](https://github.com/mdombroski/libui-lua).
 
@@ -273,8 +273,16 @@ MultilineEntry is a multiline entry. By now, the height of this control in Linux
 * me:append(text)
 * me:onChanged(func): func, one argument, the text, no return
 
+### DateTimePicker
+
+DateTimePicker is a button for select a date or a time or both. However, by now libui haven't provide getter or setter api, so it makes nonsence.
+
+* ui.newDatePicker()
+* ui.newTimePicker()
+* ui.newDateTimePicker()
+
 ## TODO
 
-* support *DateTimePicker*, the current state of libui is you choose a date or a time, and then it's over.
 * support *FontButton*, the current state of libui is you choose a font, and the it's over.
+* keep update to libui
 * more test

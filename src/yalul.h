@@ -27,6 +27,7 @@ int yalulSetGroup(lua_State *L);
 int yalulSetTab(lua_State *L);
 int yalulSetMenu(lua_State *L);
 int yalulSetMultilineEntry(lua_State *L);
+int yalulSetDateTimePicker(lua_State *L);
 
 int yalulDoCallback(lua_State *L, void *control, const char *name, int nargs);
 int yalulRegisterCallback(lua_State *L, void *control, const char *name);

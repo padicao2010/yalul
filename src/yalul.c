@@ -552,6 +552,29 @@ static int yalulNewNWMultilineEntry(lua_State *L)
     return 1;
 }
 
+static int yalulNewDatePicker(lua_State *L)
+{
+    assert(yalulCheckControl(L, 0, NULL));
+    uiDateTimePicker *picker = uiNewDatePicker();
+    yalulCreateObject(L, picker, YALUL_DATETIMEPICKER_LIB);
+    return 1;
+}
+
+static int yalulNewTimePicker(lua_State *L)
+{
+    assert(yalulCheckControl(L, 0, NULL));
+    uiDateTimePicker *picker = uiNewTimePicker();
+    yalulCreateObject(L, picker, YALUL_DATETIMEPICKER_LIB);
+    return 1;
+}
+
+static int yalulNewDateTimePicker(lua_State *L)
+{
+    assert(yalulCheckControl(L, 0, NULL));
+    uiDateTimePicker *picker = uiNewDateTimePicker();
+    yalulCreateObject(L, picker, YALUL_DATETIMEPICKER_LIB);
+    return 1;
+}
 
 static int yalulNewMenu(lua_State *L)
 {
@@ -597,6 +620,9 @@ static struct luaL_Reg yalul_table[] = {
     { "newTab",                 yalulNewTab },
     { "newMultilineEntry",      yalulNewMultilineEntry },
     { "newNWMultilineEntry",    yalulNewNWMultilineEntry },
+    { "newDatePicker",          yalulNewDatePicker },
+    { "newTimePicker",          yalulNewTimePicker },
+    { "newDateTimePicker",      yalulNewDateTimePicker },
 
     { "newMenu",                yalulNewMenu },
 
@@ -632,6 +658,7 @@ int luaopen_libyalul(lua_State *L)
     yalulSetGroup(L);
     yalulSetTab(L);
     yalulSetMultilineEntry(L);
+    yalulSetDateTimePicker(L);
 
     lua_pop(L, 1);
 
