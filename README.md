@@ -72,6 +72,16 @@ Control is an abstract class, the parent class for all the other controls. It ma
 * window:setTitle(text)
 * window:margined(): return an integer
 * window:setMargined(int)
+* window:position(): return x, y
+* window:setPosition(intX, intY)
+* window:onPositionChanged(func): func, two arguments, x and y, no returns
+* window:contentSize(): return w, h
+* window:setContentSize(intW, intH)
+* window:setContentSize(funct): func, two arguements, w and h, no returns
+* window:borderless(): return true/false
+* window:setBorderless(bool)
+* window:fullscreen(): return true/false
+* window:setFullscreen(bool)
 * window:onClosing(func): the parameter func is a function with no arguments, which returns true/false representing whether to close the window of not. Nil is also false.
 
 An example:

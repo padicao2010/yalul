@@ -26,3 +26,5 @@
 #define YALUL_ONTOGGLED     "onToggled"
 #define YALUL_ONCHANGED     "onChanged"
 #define YALUL_ONSELECTED    "onSelected"
+#define YALUL_ONPOSCHANGED  "onPositionChanged"
+#define YALUL_ONSIZECHANGED "onSizeChanged"
