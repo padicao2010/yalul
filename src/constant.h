@@ -15,6 +15,7 @@
 #define YALUL_TAB_LIB       "yalul.tab"
 #define YALUL_MULTILINEENTRY_LIB       "yalul.multilineentry"
 #define YALUL_DATETIMEPICKER_LIB       "yalul.datetimepicker"
+#define YALUL_SEPARATOR_LIB "yalul.separator"
 
 #define YALUL_MENU_LIB      "yalul.menu"
 #define YALUL_MENUS_LIB     "yalul.menus"

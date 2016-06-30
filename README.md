@@ -292,6 +292,11 @@ DateTimePicker is a button for select a date or a time or both. However, by now 
 * ui.newTimePicker()
 * ui.newDateTimePicker()
 
+### Separator
+
+* ui.newHSeparator(): Horizontal separator
+* ui.newVSeparator(): Vertical separator
+
 ## TODO
 
 * support *FontButton*, the current state of libui is you choose a font, and the it's over.
