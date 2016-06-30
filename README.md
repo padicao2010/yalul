@@ -203,7 +203,8 @@ Entry is an one-line editable textbox.
 ### ProgressBar
 
 * ui.newProgressBar()
-* progressBar:setValue(): sets the progress
+* progressBar:value(): return integer value
+* progressBar:setValue(intValue): sets the progress
 
 ### Slider
 

@@ -1,6 +1,14 @@
 #include "yalul.h"
 #include "constant.h"
 
+static int progressBarValue(lua_State *L)
+{
+    assert(yalulCheckControl(L, 1, YALUL_PROGRESSBAR_LIB));
+    int prog = uiProgressBarValue(CAST_ARG(1, ProgressBar));
+    lua_pushinteger(L, prog);
+    return 1;
+}
+
 static int progressBarSetValue(lua_State *L)
 {
     assert(yalulCheckControl(L, 1, YALUL_PROGRESSBAR_LIB));
@@ -11,6 +19,7 @@ static int progressBarSetValue(lua_State *L)
 }
 
 static struct luaL_Reg meta_ProgressBar[] = {
+    { "value",                    progressBarValue },
     { "setValue",                 progressBarSetValue },
     { NULL }
 };
