@@ -297,9 +297,20 @@ DateTimePicker is a button for select a date or a time or both. However, by now 
 * ui.newHSeparator(): Horizontal separator
 * ui.newVSeparator(): Vertical separator
 
+### Form
+
+Show data in a two-column form. The left column shows the title, the right the control.
+
+* ui.newForm()
+* form:append(title, control, stretchy)
+* form:delete(index)
+* form:delete(control)
+* form:padded()
+* form:setPadded(intValue)
+
 ## TODO
 
 * support *FontButton*, the current state of libui is you choose a font, and the it's over.
-* support Form and Grid
+* support Grid
 * keep update to libui
 * more test

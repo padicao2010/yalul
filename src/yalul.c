@@ -592,6 +592,14 @@ static int yalulNewVSeparator(lua_State *L)
     return 1;
 }
 
+static int yalulNewForm(lua_State *L)
+{
+    assert(yalulCheckControl(L, 0, NULL));
+    uiForm *f = uiNewForm();
+    yalulCreateObject(L, f, YALUL_FORM_LIB);
+    return 1;
+}
+
 static int yalulNewMenu(lua_State *L)
 {
     assert(yalulCheckControl(L, 0, NULL));
@@ -641,6 +649,7 @@ static struct luaL_Reg yalul_table[] = {
     { "newDateTimePicker",      yalulNewDateTimePicker },
     { "newHSeparator",          yalulNewHSeparator },
     { "newVSeparator",          yalulNewVSeparator },
+    { "newForm",                yalulNewForm },
 
     { "newMenu",                yalulNewMenu },
 
@@ -678,6 +687,7 @@ int luaopen_libyalul(lua_State *L)
     yalulSetMultilineEntry(L);
     yalulSetDateTimePicker(L);
     yalulSetSeparator(L);
+    yalulSetForm(L);
 
     lua_pop(L, 1);
 
