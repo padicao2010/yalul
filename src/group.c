@@ -5,13 +5,15 @@ static int groupSetChild(lua_State *L)
 {
     assert(yalulCheckControl(L, 1, YALUL_GROUP_LIB));
     uiGroup *g = CAST_ARG(1, Group);
-    uiControl *c = CAST_ARG(2, Control);
 
-    uiGroupSetChild(g, c);
-
+    uiGroupSetChild(g, NULL);
     yalulReleaseChild(L, g, 1);
 
-    yalulSetChild(L, g, c, 1);
+    if(lua_gettop(L) == 2 && !lua_isnil(L, 2)) {
+        uiControl *c = CAST_ARG(2, Control);
+        uiGroupSetChild(g, c);
+        yalulSetChild(L, g, c, 1);
+    }
 
     RETURN_SELF;
 }

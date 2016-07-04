@@ -5,13 +5,15 @@ static int windowSetChild(lua_State *L)
 {
     assert(yalulCheckControl(L, 1, YALUL_WINDOW_LIB));
     uiWindow *w = CAST_ARG(1, Window);
-    uiControl *c = CAST_ARG(2, Control);
 
-    uiWindowSetChild(w, c);
-
+    uiWindowSetChild(w, NULL);
     yalulReleaseChild(L, w, 1);
 
-    yalulSetChild(L, w, c, 1);
+    if(lua_gettop(L) == 2 && !lua_isnil(L, 2)) {
+        uiControl *c = CAST_ARG(2, Control);
+        uiWindowSetChild(w, c);
+        yalulSetChild(L, w, c, 1);
+    }
 
     RETURN_SELF;
 }

@@ -207,6 +207,7 @@ int yalulReleaseChild(lua_State *L, void *control, int index)
     }
 
     lua_pop(L, 1);
+    return 0;
 }
 
 int yalulGetChildIndex(lua_State *L, uiControl *parent, uiControl *child)
