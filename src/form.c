@@ -21,7 +21,7 @@ static int formAppend(lua_State *L)
     assert(yalulCheckControl(L, 1, YALUL_FORM_LIB));
 
     uiForm *form = CAST_ARG(1, Form);
-    char *name = luaL_checkstring(L, 2);
+    const char *name = luaL_checkstring(L, 2);
     uiControl *child = CAST_ARG(3, Control);
     int stretchy = 0;
     if(lua_gettop(L) > 3) {

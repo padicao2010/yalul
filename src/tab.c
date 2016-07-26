@@ -29,7 +29,7 @@ static int tabAppend(lua_State *L)
     assert(yalulCheckControl(L, 1, YALUL_TAB_LIB));
 
     uiTab *tab = CAST_ARG(1, Tab);
-    char *name = luaL_checkstring(L, 2);
+    const char *name = luaL_checkstring(L, 2);
     uiControl *child = CAST_ARG(3, Control);
 
     uiTabAppend(tab, name, child);
@@ -43,7 +43,7 @@ static int tabInsertAt(lua_State *L)
     assert(yalulCheckControl(L, 1, YALUL_TAB_LIB));
 
     uiTab *tab = CAST_ARG(1, Tab);
-    char *name = luaL_checkstring(L, 2);
+    const char *name = luaL_checkstring(L, 2);
     int index = luaL_checkinteger(L, 3);
     uiControl *child = CAST_ARG(4, Control);
 
